@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { CheckCircle, Send } from 'lucide-react';
 import { supabase } from "../lib/supabase";
 import { useState, useEffect } from 'react';
-import { Timestamp } from "next/dist/server/lib/cache-handlers/types";
 
 export function RSVPSection() {
     type Message = {
