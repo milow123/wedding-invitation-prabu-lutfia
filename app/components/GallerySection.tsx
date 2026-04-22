@@ -8,21 +8,37 @@ export function GallerySection() {
 
     const images = [
         {
-            url: "https://images.unsplash.com/photo-1768777270882-9f74939fee50?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWRkaW5nJTIwcmVjZXB0aW9uJTIwZWxlZ2FudCUyMHRhYmxlfGVufDF8fHx8MTc3MjU4NTY4N3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+            url: "/WHY_7904.png",
             alt: "Wedding reception"
         },
         {
-            url: "https://images.unsplash.com/photo-1769868628482-528d35164ae9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWRkaW5nJTIwZmxvd2VycyUyMGJvdXF1ZXQlMjB3aGl0ZSUyMHJvc2VzfGVufDF8fHx8MTc3MjU4NTY4N3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+            url: "/WHY_7784.jpg",
             alt: "Wedding flowers"
         },
         {
-            url: "https://images.unsplash.com/photo-1762216444919-043cf813e4de?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWRkaW5nJTIwdmVudWUlMjBvdXRkb29yJTIwZ2FyZGVufGVufDF8fHx8MTc3MjU4MzQwNXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+            url: "/WHY_7783.jpg",
             alt: "Venue garden"
         },
         {
-            url: "https://images.unsplash.com/photo-1768900044120-650653953a6a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyb21hbnRpYyUyMHdlZGRpbmclMjBjb3VwbGUlMjBlbGVnYW50fGVufDF8fHx8MTc3MjU4NTY4Nnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+            url: "/WHY_7869.jpg",
             alt: "Romantic couple"
-        }
+        },
+        {
+            url: "/IMG_1696.JPG",
+            alt: "Romantic couple"
+        },
+        {
+            url: "/IMG_1699.JPG",
+            alt: "Romantic couple"
+        },
+        {
+            url: "/IMG_1706.JPG",
+            alt: "Romantic couple"
+        },
+        {
+            url: "/IMG_1707.JPG",
+            alt: "Romantic couple"
+        },
     ];
 
     return (
@@ -38,9 +54,6 @@ export function GallerySection() {
                     <h2 className="text-3xl sm:text-4xl md:text-5xl mb-4 text-rose-900 font-serif">
                         Gallery
                     </h2>
-                    <p className="text-gray-600 text-base sm:text-lg">
-                        Click any image to view larger
-                    </p>
                 </motion.div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
@@ -59,7 +72,16 @@ export function GallerySection() {
                             <img
                                 src={image.url}
                                 alt={image.alt}
-                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                className={`w-full h-full object-cover scale-110 transition duration-700 group-hover:scale-125"
+                                ${index === 0 ? "object-[50%_80%]" : ""}
+                                ${index === 1 ? "object-[50%_50%]" : ""}
+                                ${index === 2 ? "object-[50%_80%]" : ""}
+                                ${index === 3 ? "object-[50%_80%]" : ""}
+                                ${index === 4 ? "object-[50%_40%]" : ""}
+                                ${index === 5 ? "object-[50%_40%]" : ""}
+                                ${index === 6 ? "object-[50%_40%]" : ""}
+                                ${index === 7 ? "object-[50%_40%]" : ""}
+                                `}
                             />
                             <div className="absolute inset-0 bg-linear-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                                 <span className="text-white text-lg">Click to enlarge</span>

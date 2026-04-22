@@ -1,6 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Luxurious_Script } from "next/font/google";
+
+const luxuriousFont = Luxurious_Script({
+    //family: ["Luxurious Script", "cursive"],
+    weight: "400",
+    subsets: ["latin"],
+    style: "normal",
+});
 
 export default function OurStorySection() {
     const photos = [
@@ -8,7 +16,7 @@ export default function OurStorySection() {
         "/2.jpeg",
         "/3.jpeg",
         "/4.jpeg",
-        "/5.jpeg",
+        "/5.jpg",
         "/6.jpeg",
         "/7.jpeg",
         "/8.jpeg",
@@ -20,16 +28,29 @@ export default function OurStorySection() {
 
     const storyData = [
         {
-            title: "Pertemuan Awal",
-            text: "Semua berawal dari sebuah ruang di salah satu rumah sakit di Yogyakarta. Di tempat itulah pertemuan sederhana menjadi awal kisah yang istimewa.",
+            title: "Chapter I — The First Hello",
+            subtitle: "When Two Paths Crossed",
+            text: "Tidak ada yang benar-benar kebetulan. Di pertengahan 2018, dua orang asing dipertemukan oleh perkenalan sederhana karena pertemanan yang sama. Percakapan kecil di layar ponsel perlahan membawa kami pada sebuah pertemuan pertama yang penuh tawa dan cerita.",
         },
         {
-            title: "Menjalin Ikatan Cinta",
+            title: "Chapter II — A Story Unfolds",
+            subtitle: "Growing, Learning, Returning",
             text: "Dari perbincangan yang ringan, tumbuh rasa nyaman dan kedekatan. Seiring waktu, perjalanan bersama membawa keduanya menuju hubungan yang lebih dalam.",
         },
         {
-            title: "Jenjang Lebih Serius",
-            text: "Dengan restu keluarga dan keyakinan hati, langkah cinta ini akhirnya mengantarkan mereka menuju hari bahagia yang dinantikan bersama.",
+            title: "Chapter III — A Gentle Promise",
+            subtitle: "When Love Meets Family",
+            text: "Waktu membawa kisah ini semakin dalam. Pada 26 Januari 2025, sebuah langkah berani diambil—datang dengan niat yang tulus untuk meminta restu.",
+        },
+        {
+            title: "Chapter IV — Two Families, One Hope",
+            subtitle: "The Engagement",
+            text: "Pada 21 September 2025, dua keluarga dipertemukan dalam sebuah lamaran, sebuah awal dari janji yang lebih besar.",
+        },
+        {
+            title: "Chapter V — Forever Begins",
+            subtitle: "The Day We Say “I Do”",
+            text: "Kini, setelah perjalanan yang panjang dan penuh warna, kami bersiap menuliskan babak baru memulai selamanya pada 30 Mei 2026",
         },
     ];
 
@@ -54,7 +75,7 @@ export default function OurStorySection() {
                 >
                     <div className="text-center max-w-2xl mx-auto" />
                     <h2 className="text-3xl md:text-4xl italic font-serif text-rose-900">
-                        Wedding Story
+                        Our Story
                     </h2>
                     <div className="h-[1px] w-24 bg-white/50" />
                 </motion.div>
@@ -79,7 +100,7 @@ export default function OurStorySection() {
                                     }`}
                             >
                                 {/* Title */}
-                                <h3 className="text-2xl md:text-3xl italic font-serif text-rose-900 whitespace-nowrap">
+                                <h3 className="text-3xl md:text-3xl italic font-serif text-rose-900 whitespace-nowrap">
                                     {story.title}
                                 </h3>
 

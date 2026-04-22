@@ -52,19 +52,23 @@ export default function IntroductionSection() {
                         className="relative w-full h-screen overflow-hidden"
                     >
                         {/* IMAGE with cinematic zoom */}
-                        <motion.img
-                            src="/WHY_7281.JPG"
-                            alt="Bride"
-                            initial={{ scale: 1.15, y: 40 }}
-                            whileInView={{ scale: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 2, ease: "easeOut" }}
-                            className="absolute inset-0 w-full h-full object-cover object-center"
-                        />
+                        <motion.section className="relative w-full h-screen flex items-center justify-center">
 
-                        {/* OVERLAY */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#B76E79]/70 via-black/30 to-transparent" />
+                            <div className="relative w-[92%] h-[90%] overflow-hidden rounded-[10px] shadow-2xl">
 
+                                <motion.img
+                                    src="/WHY_7281.JPG"
+                                    initial={{ scale: 1.2 }}
+                                    whileInView={{ scale: 1 }}
+                                    transition={{ duration: 2.5, ease: "easeOut" }}
+                                    className="w-full h-full object-cover object-center"
+                                />
+
+                                {/* overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#B76E79]/70 via-black/30 to-transparent" />
+
+                            </div>
+                        </motion.section>
                         {/* TEXT CARD */}
                         <motion.div
                             initial={{ opacity: 0, x: -50, y: 40 }}
@@ -130,19 +134,23 @@ export default function IntroductionSection() {
                         className="relative w-full h-screen overflow-hidden"
                     >
                         {/* IMAGE with cinematic zoom */}
-                        <motion.img
-                            src="/WHY_8031.PNG"
-                            alt="Bride"
-                            initial={{ scale: 1.15, y: 40 }}
-                            whileInView={{ scale: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 2, ease: "easeOut" }}
-                            className="absolute inset-0 w-full h-full object-cover object-center"
-                        />
+                        <motion.section className="relative w-full h-screen flex items-center justify-center">
 
-                        {/* OVERLAY */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#B76E79]/70 via-black/30 to-transparent" />
+                            <div className="relative w-[92%] h-[90%] overflow-hidden rounded-[10px] shadow-2xl">
 
+                                <motion.img
+                                    src="/WHY_8031.PNG"
+                                    initial={{ scale: 1.2 }}
+                                    whileInView={{ scale: 1 }}
+                                    transition={{ duration: 2.5, ease: "easeOut" }}
+                                    className="w-full h-full object-cover object-[50%_30%]"
+                                />
+
+                                {/* overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#B76E79]/70 via-black/30 to-transparent" />
+
+                            </div>
+                        </motion.section>
                         {/* TEXT CARD */}
                         <motion.div
                             initial={{ opacity: 0, x: -50, y: 40 }}

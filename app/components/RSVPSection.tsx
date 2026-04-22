@@ -1,38 +1,83 @@
 "use client";
 import { motion } from "framer-motion";
-import { useState } from 'react';
 import { CheckCircle, Send } from 'lucide-react';
+import { supabase } from "../lib/supabase";
+import { useState, useEffect } from 'react';
+import { Timestamp } from "next/dist/server/lib/cache-handlers/types";
 
 export function RSVPSection() {
+    type Message = {
+        id: string;
+        name: string;
+        guests: number;
+        attending: string;
+        message: string;
+        created_at: string;
+    };
     const [formData, setFormData] = useState({
         name: '',
         guests: '1',
         attending: 'yes',
         message: ''
     });
+
+    const [messages, setMessages] = useState<Message[]>([]);
+    const fetchMessages = async () => {
+        const { data, error } = await supabase
+            .from('rsvps')
+            .select('id, name, message, created_at')
+            .order('created_at', { ascending: false });
+        console.log("message:", data);
+
+        if (!error && data) {
+            setMessages(data as Message[]);
+        }
+    };
+    useEffect(() => {
+        fetchMessages();
+    }, []);
+
+
     const [submitted, setSubmitted] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
+
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
 
-        // Simulate submission delay
-        setTimeout(() => {
-            console.log('RSVP Submitted:', formData);
-            setIsSubmitting(false);
-            setSubmitted(true);
+        const { error } = await supabase
+            .from('rsvps')
+            .insert([
+                {
+                    name: formData.name,
+                    guests: Number(formData.guests),
+                    attending: formData.attending,
+                    message: formData.message,
+                }
+            ]);
 
-            setTimeout(() => {
-                setSubmitted(false);
-                setFormData({
-                    name: '',
-                    guests: '1',
-                    attending: 'yes',
-                    message: ''
-                });
-            }, 3000);
-        }, 1000);
+        if (error) {
+            console.error("SUPABASE ERROR :", error);
+            alert(error.message);
+            setIsSubmitting(false);
+            return;
+        }
+
+        setIsSubmitting(false);
+        setSubmitted(true);
+
+        setTimeout(() => {
+            setSubmitted(false);
+            setFormData({
+                name: '',
+                guests: '1',
+                attending: 'yes',
+                message: ''
+            });
+        }, 3000);
+        await fetchMessages(); // refresh list
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -40,7 +85,9 @@ export function RSVPSection() {
             ...formData,
             [e.target.name]: e.target.value
         });
+
     };
+
 
     return (
         <section id="rsvp" className="py-16 sm:py-20 lg:py-24 bg-linear-to-b from-rose-50/30 to-white relative overflow-hidden scroll-smooth">
@@ -89,8 +136,8 @@ export function RSVPSection() {
                                     required
                                     value={formData.name}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent text-sm sm:text-base"
-                                    placeholder="John Doe"
+                                    className="w-full border border-gray-300 rounded-lg p-3 text-gray-800 placeholder:text-gray-500 placeholder:opacity-100bg-white"
+                                    placeholder="Example : Lutfianisa Ayu Avriza"
                                 />
                             </div>
 
@@ -105,7 +152,7 @@ export function RSVPSection() {
                                         required
                                         value={formData.attending}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent text-sm sm:text-base"
+                                        className="w-full border border-gray-300 rounded-lg p-3 text-gray-800 placeholder:text-gray-500 placeholder:opacity-100bg-white"
                                     >
                                         <option value="yes">{"Yes, I'll be there"}</option>
                                         <option value="no">{"Sorry, can't make it"}</option>
@@ -122,7 +169,7 @@ export function RSVPSection() {
                                         required
                                         value={formData.guests}
                                         onChange={handleChange}
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent text-sm sm:text-base"
+                                        className="w-full border border-gray-300 rounded-lg p-3 text-gray-800 placeholder:text-gray-500 placeholder:opacity-100bg-white"
                                     >
                                         {[1, 2, 3, 4, 5].map(num => (
                                             <option key={num} value={num}>{num}</option>
@@ -132,7 +179,7 @@ export function RSVPSection() {
                             </div>
                             <div>
                                 <label htmlFor="message" className="block text-gray-700 mb-2 text-sm sm:text-base">
-                                    Message (Optional)
+                                    Leave your wishes
                                 </label>
                                 <textarea
                                     id="message"
@@ -140,7 +187,7 @@ export function RSVPSection() {
                                     rows={4}
                                     value={formData.message}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent text-sm sm:text-base resize-none"
+                                    className="w-full border border-gray-300 rounded-lg p-3 text-gray-800 placeholder:text-gray-500 placeholder:opacity-100bg-white"
                                     placeholder="Share your best wishes..."
                                 />
                             </div>
@@ -170,9 +217,35 @@ export function RSVPSection() {
                                 )}
                             </motion.button>
                         </form>
+
                     )}
                 </motion.div>
+                <div className="mt-10">
+
+                    <div className="space-y-4 max-h-80 overflow-y-auto">
+                        {messages.length === 0 ? (
+                            <p className="text-center text-gray-500 text-sm">
+                                Belum ada ucapan
+                            </p>
+                        ) : (
+                            messages.map((msg) => (
+                                <div
+                                    key={String(msg.id)}
+                                    className="bg-rose-50 border border-rose-100 p-4 rounded-lg"
+                                >
+                                    <p className="text-sm text-gray-800 italic">
+                                        &quot;{msg.message}&quot;
+                                    </p>
+                                    <p className="text-xs text-gray-500 mt-2 text-right">
+                                        - {msg.name}
+                                    </p>
+                                </div>
+                            ))
+                        )}
+                    </div>
+                </div>
             </div>
+
         </section>
     );
 }

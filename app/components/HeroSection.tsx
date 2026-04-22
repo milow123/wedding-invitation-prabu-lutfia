@@ -3,6 +3,26 @@ import { motion } from "framer-motion";
 import { Heart, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { useSearchParams } from "next/navigation";
+import { Luxurious_Script } from "next/font/google";
+
+const luxuriousFont = Luxurious_Script({
+    //family: ["Luxurious Script", "cursive"],
+    weight: "400",
+    subsets: ["latin"],
+    style: "normal",
+});
+
+const formatName = (name: string) => {
+    try {
+        return decodeURIComponent(name)
+            .replace(/\+/g, " ")
+            .toLowerCase()
+            .replace(/\b\w/g, (c) => c.toUpperCase());
+    } catch {
+        return name;
+    }
+};
+
 
 export function HeroSection() {
     const searchParams = useSearchParams();
@@ -104,7 +124,7 @@ export function HeroSection() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.6 }}
-                    className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-4 sm:mb-6 font-serif"
+                    className={`text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-4 sm:mb-6 ${luxuriousFont.className}`}
                 >
                     Prabu & Lutfia
                 </motion.h1>
@@ -126,8 +146,8 @@ export function HeroSection() {
                     <p className="text-sm text-gray-200">Kepada Yth.</p>
                     <p className="text-sm text-gray-200">Bapak/Ibu/Saudara/i</p>
 
-                    <h3 className="text-xl md:text-2xl font-serif mt-2 text-sm text-gray-200">
-                        {guest ? decodeURIComponent(guest) : "Tamu Undangan"}
+                    <h3 className="text-xl md:text-2xl font-serif mt-2 text-gray-200">
+                        {guest ? formatName(guest) : "Tamu Undangan"}
                     </h3>
                 </div>
                 <motion.div
