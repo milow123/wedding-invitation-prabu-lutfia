@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import PageTransition from "./components/PageTransition";
-import Audio from "./components/Audio";
+//import PageTransition from "./components/PageTransition";
+//import Audio from "./components/Audio";
 import "./globals.css";
 
 const inter = Inter({
@@ -26,10 +26,10 @@ export default function RootLayout({
       <body
         className={`${inter.className} antialiased`}
       >
-        <Audio />
-        <PageTransition>
-          {children}
-        </PageTransition>
+        {/* <Audio />
+        <PageTransition> */}
+        {children}
+        {/* </PageTransition> */}
       </body>
     </html>
   );
