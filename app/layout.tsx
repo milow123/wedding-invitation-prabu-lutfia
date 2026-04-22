@@ -19,8 +19,6 @@ export const metadata: Metadata = {
   description: "The Wedding of Prabu & Lutfia",
   icons: {
     icon: "/logo2.ico",
-    shortcut: "/logo2.ico",
-    apple: "/logo2.ico",
   },
 };
 

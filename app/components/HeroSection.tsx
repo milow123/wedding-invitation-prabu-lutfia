@@ -2,8 +2,8 @@
 import { motion } from "framer-motion";
 import { Heart, Menu, X } from 'lucide-react';
 import { useState } from 'react';
-import { useSearchParams } from "next/navigation";
 import { Luxurious_Script } from "next/font/google";
+import { GuestName } from "./GuestName";
 
 const luxuriousFont = Luxurious_Script({
     //family: ["Luxurious Script", "cursive"],
@@ -25,8 +25,6 @@ const formatName = (name: string) => {
 
 
 export function HeroSection() {
-    const searchParams = useSearchParams();
-    const guest = searchParams.get("to");
     const [showMenu, setShowMenu] = useState(false);
 
     const scrollToSection = (id: string) => {
@@ -147,7 +145,7 @@ export function HeroSection() {
                     <p className="text-sm text-gray-200">Bapak/Ibu/Saudara/i</p>
 
                     <h3 className="text-xl md:text-2xl font-serif mt-2 text-gray-200">
-                        {guest ? formatName(guest) : "Tamu Undangan"}
+                        {GuestName()}
                     </h3>
                 </div>
                 <motion.div
