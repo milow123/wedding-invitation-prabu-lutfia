@@ -139,7 +139,7 @@ export default function IntroductionSection() {
                             <div className="relative w-[92%] h-[90%] overflow-hidden rounded-[10px] shadow-2xl">
 
                                 <motion.img
-                                    src="/WHY_8031.PNG"
+                                    src="/WHY_8031.png"
                                     initial={{ scale: 1.2 }}
                                     whileInView={{ scale: 1 }}
                                     transition={{ duration: 2.5, ease: "easeOut" }}
