@@ -22,14 +22,17 @@ export function RSVPSection() {
 
     const [messages, setMessages] = useState<Message[]>([]);
     const fetchMessages = async () => {
-        const { data, error } = await supabase
-            .from('rsvps')
-            .select('id, name, message, created_at')
-            .order('created_at', { ascending: false });
-        console.log("message:", data);
+        try {
+            const { data, error } = await supabase
+                .from('rsvps')
+                .select('id, name, message, created_at')
+                .order('created_at', { ascending: false });
 
-        if (!error && data) {
-            setMessages(data as Message[]);
+            if (!error && data) {
+                setMessages(data as Message[]);
+            }
+        } catch (err) {
+            console.error("FETCH ERROR:", err);
         }
     };
     useEffect(() => {
@@ -46,37 +49,28 @@ export function RSVPSection() {
         e.preventDefault();
         setIsSubmitting(true);
 
-        const { error } = await supabase
-            .from('rsvps')
-            .insert([
-                {
-                    name: formData.name,
-                    guests: Number(formData.guests),
-                    attending: formData.attending,
-                    message: formData.message,
-                }
-            ]);
+        try {
+            const { error } = await supabase
+                .from('rsvps')
+                .insert([
+                    {
+                        name: formData.name,
+                        guests: Number(formData.guests),
+                        attending: formData.attending,
+                        message: formData.message,
+                    }
+                ]);
 
-        if (error) {
-            console.error("SUPABASE ERROR :", error);
-            alert(error.message);
-            setIsSubmitting(false);
-            return;
+            if (error) throw error;
+
+            setSubmitted(true);
+            await fetchMessages();
+        } catch (err: any) {
+            console.error("INSERT ERROR:", err);
+            alert("Failed to send RSVP");
         }
 
         setIsSubmitting(false);
-        setSubmitted(true);
-
-        setTimeout(() => {
-            setSubmitted(false);
-            setFormData({
-                name: '',
-                guests: '1',
-                attending: 'yes',
-                message: ''
-            });
-        }, 3000);
-        await fetchMessages(); // refresh list
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -135,7 +129,7 @@ export function RSVPSection() {
                                     required
                                     value={formData.name}
                                     onChange={handleChange}
-                                    className="w-full border border-gray-300 rounded-lg p-3 text-gray-800 placeholder:text-gray-500 placeholder:opacity-100bg-white"
+                                    className="w-full border border-gray-300 rounded-lg p-3 text-gray-800 placeholder:text-gray-500 placeholder:opacity-100 bg-white"
                                     placeholder="Example : Lutfianisa Ayu Avriza"
                                 />
                             </div>
@@ -151,7 +145,7 @@ export function RSVPSection() {
                                         required
                                         value={formData.attending}
                                         onChange={handleChange}
-                                        className="w-full border border-gray-300 rounded-lg p-3 text-gray-800 placeholder:text-gray-500 placeholder:opacity-100bg-white"
+                                        className="w-full border border-gray-300 rounded-lg p-3 text-gray-800 placeholder:text-gray-500 placeholder:opacity-100 bg-white"
                                     >
                                         <option value="yes">{"Yes, I'll be there"}</option>
                                         <option value="no">{"Sorry, can't make it"}</option>
@@ -186,7 +180,7 @@ export function RSVPSection() {
                                     rows={4}
                                     value={formData.message}
                                     onChange={handleChange}
-                                    className="w-full border border-gray-300 rounded-lg p-3 text-gray-800 placeholder:text-gray-500 placeholder:opacity-100bg-white"
+                                    className="w-full border border-gray-300 rounded-lg p-3 text-gray-800 placeholder:text-gray-500 placeholder:opacity-100 bg-white"
                                     placeholder="Share your best wishes..."
                                 />
                             </div>
