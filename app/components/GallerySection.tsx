@@ -12,11 +12,11 @@ export function GallerySection() {
             alt: "Wedding reception"
         },
         {
-            url: "/WHY_7784.jpg",
+            url: "/why_7784.jpg",
             alt: "Wedding flowers"
         },
         {
-            url: "/WHY_7783.jpg",
+            url: "/why_7783.jpg",
             alt: "Venue garden"
         },
         {
