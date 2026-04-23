@@ -13,15 +13,15 @@ export function GallerySection() {
         },
         {
             url: "/WHY_7784.JPG",
-            alt: "Wedding flowers"
+            alt: "Wedding reception"
         },
         {
-            url: "/WHY_7783.jpg",
-            alt: "Venue garden"
+            url: "/WHY_7783.JPG",
+            alt: "Wedding reception"
         },
         {
             url: "/WHY_7869.JPG",
-            alt: "Romantic couple"
+            alt: "Wedding reception"
         },
         {
             url: "/IMG_1696.JPG",
