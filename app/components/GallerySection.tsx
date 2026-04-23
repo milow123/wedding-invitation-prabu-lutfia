@@ -16,7 +16,7 @@ export function GallerySection() {
             alt: "Wedding reception"
         },
         {
-            url: "/WHY_7783.JPG",
+            url: "/WHY_7783.jpg",
             alt: "Wedding reception"
         },
         {
